@@ -2,9 +2,9 @@ import { useRef } from 'react';
 import { StyleSheet, Text, View, Pressable, Animated } from 'react-native';
 
 const CARD_COLORS = ['#E8F5E9', '#E3F2FD', '#FFF3E0', '#FCE4EC'];
-const CARD_TITLES = ['Início de Turno', 'Saída Almoço', 'Volta Almoço', 'Fim de Turno'];
+const CARD_TITLES = ['Início de Turno😒', 'Saída Almoço🤤', 'Volta Almoço🥱', 'Fim de Turno🤩'];
 
-function CardComAnimacao({ color, title }) {
+function CardComAnimacao({ color, title, TextStyle, ViewStyle }) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   const animarPressionar = () => {
@@ -35,9 +35,10 @@ function CardComAnimacao({ color, title }) {
         style={[
           styles.card,
           { backgroundColor: color, transform: [{ scale: scaleAnim }] },
+          ViewStyle
         ]}
       >
-        <Text style={styles.text}>{title}</Text>
+        <Text style={[styles.text, TextStyle]}>{title}</Text>
       </Animated.View>
     </Pressable>
   );
@@ -46,7 +47,13 @@ function CardComAnimacao({ color, title }) {
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.textTitle}>Melky3Aula - Registro de Ponto</Text>
+      <Text style={styles.textTitle}>Melky3Aula - Registro de Ponto ⏱️</Text>
+        <CardComAnimacao 
+          color=''
+          title={"Aqui Conseguimos criar estilizações e cores da forma que quisermos!!!\n" + "🤌👍🤟"}
+          TextStyle={styles.textBody}
+          ViewStyle={styles.cardInputInformation}
+        />
       <View style={styles.grid}>
         {CARD_COLORS.map((color, index) => (
           <CardComAnimacao
@@ -93,6 +100,15 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
 
+  cardInputInformation:{
+    width: '100%',
+    height: '35px',
+    backgroundColor: '#88E67E',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+  },
+
   text: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -100,8 +116,14 @@ const styles = StyleSheet.create({
   },
 
   textTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'black',
+    fontSize: 30,
+    fontWeight: '900',
+    color: '#E0D328',
   },
+
+  textBody: {
+    fontSize: 22,
+    fontWeight: '900',
+    color: '#7E27A1'
+  }
 });
